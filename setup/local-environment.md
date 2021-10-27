@@ -1,8 +1,4 @@
----
-description: Running Experience
----
-
-# Getting Started
+# Local Environment
 
 ## Local Development
 
@@ -13,7 +9,7 @@ $ bin/setup
 ```
 
 {% hint style="info" %}
-This assumes that you have a machine capable of running Ruby, Postgresql (10+), and Redis.  If that is not configured on your machine a few `brew` commands should do the trick 😉 &#x20;
+This assumes that you have a machine capable of running Ruby, Postgresql (10+), and Redis.  If that is not configured on your machine a few `brew` commands should do the trick 😉&#x20;
 {% endhint %}
 
 This will do a couple of things:
@@ -63,12 +59,54 @@ There are several servers that you will need to run have a functioning local env
 
 #### Rails
 
+A standard rails server on any port that you like.
+
 ```bash
 $ rails s
 ```
 
 #### Webpacker
 
+A local Webpacker dev server to hot reload JS and React changes.
+
 ```bash
 $ bin/webpack-dev-server
 ```
+
+#### Sidekiq
+
+Sidekiq Enterprise for background jobs.
+
+```bash
+$ bundle exec sidekiq
+```
+
+{% hint style="info" %}
+Experience uses a private gem repository for Sidekiq Enterprise.  You will need to add the following keys to Bundler.
+
+```
+$ BUNDLE_ENTERPRISE__CONTRIBSYS__COM=sidekiq_key
+$ bundle config --local enterprise.contribsys.com sidekiq_key
+```
+{% endhint %}
+
+#### React on Rails Renderer
+
+React on Rails for server side rendering our react components.
+
+```bash
+$ yarn run renderer
+```
+
+{% hint style="info" %}
+Experience uses a private Gem repository for React on Rails.  You will need to add the following keys to Bundler.
+
+```
+$ bundle config set --local 'rubygems.pkg.github.com' '<username>:<token>'
+
+// Also since we have private npm package in our app too we need to export NPM_TOKEN env variable to be able to install that like so:
+export NPM_TOKEN=<token>
+
+// for convinience you can do that in .zshrc or some other file which your termincal calls before start.
+```
+{% endhint %}
