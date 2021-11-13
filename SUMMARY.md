@@ -29,6 +29,7 @@
 
 ## Team Patterns <a href="team-patterns-1" id="team-patterns-1"></a>
 
+* [Code Reviews](team-patterns-1/code-reviews.md)
 * [Pull Requests](team-patterns-1/pull-requests.md)
 * [TDD](team-patterns-1/tdd-1.md)
 * [TMUX](team-patterns-1/tmux.md)
