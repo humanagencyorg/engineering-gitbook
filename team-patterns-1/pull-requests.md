@@ -17,3 +17,7 @@ If you have a piece of code that you are not sure about, leave a comment in your
 1. Include the ID of your story.  `ha-12840`
 2. Provide a short description of the branch with words separated by dashes `ha-12840-add-plans`
 3. If you have to branch from a feature branch, use underscores to denote the change.  `ha-12840-add-plans_admin`.
+
+### Cleanup Your Squash Commit
+
+Before you merge into `master`, please take a second to clean up your master commit so that it is coherent and helpful to the next engineer who has to look at the code.
