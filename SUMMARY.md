@@ -40,6 +40,7 @@
 
 * [Stories](agile-patterns/stories.md)
 * [Team Lead Role](agile-patterns/team-lead-role.md)
+* [Retrospectives](agile-patterns/retrospectives.md)
 
 ## Templates
 
