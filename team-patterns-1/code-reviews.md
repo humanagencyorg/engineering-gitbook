@@ -12,11 +12,19 @@ Code reviews are the final step in producing easy to read, easy to understand co
 
 1. &#x20;Planning - talk about how you want to implement the story.
 2. Pair Programming - work together with your pair to implement.
-3. **Code Review - **3rd set of eyes to make sure your code is easy to read and understand.
+3. **Code Review -** 3rd set of eyes to make sure your code is easy to read and understand.
 
 {% hint style="info" %}
 If a reviewer outside of the story can understand your code in Code Review, there is a very good chance that the engineer who maintains your code will as well!
 {% endhint %}
+
+## Code Review Etiquette
+
+Whether you are providing the code review or receiving the code review, please embrace the following:
+
+1. **Use soft words** - Written words come off much harsher than spoken words.  Be overtly more kind and avoid using negative words.
+2. **First seek to understand** - Start your comment with a question. After asking your question, you can provide your thoughts.
+3. **Talk in Person** - A quick 5 minute conversation is worth 5 comments.  Talk in person if any comment is unclear.
 
 ## Receiving Code Reviews
 
