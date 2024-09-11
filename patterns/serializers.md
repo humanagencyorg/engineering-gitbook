@@ -2,52 +2,58 @@
 
 ## Overview
 
-This is where you describe how the particular pattern works
+The app currently uses [Alba](https://github.com/okuramasafumi/alba) as our JSON serializer.  You can read more about Alba in their [documentation](https://okuramasafumi.github.io/alba/).
 
-**High level point** - Provide a explanation for the high level point
+The benefit of Alba is that provides a flexible way to model JSON responses based on Ruby objects.
 
-**High level point** - Provide a explanation for the high level point
+Alba serializers are stored in `app/resources`
 
-**High level point** - Provide a explanation for the high level point
+## Example <a href="#example" id="example"></a>
 
-**High level point** - Provide a explanation for the high level point
-
-## Example <a href="example" id="example"></a>
-
-Post a code sample of the pattern.  This could be copied from the code base or contrived.
-
-```ruby
+```
 # frozen_string_literal: true
 
-module Api
-  module V1
-    module References
-      class BlockSerializer
-        include FastJsonapi::ObjectSerializer
+class ApiKeyResource < ApplicationResource
+  attributes :id, :token
 
-        set_key_transform :camel_lower
-
-        attribute :value, &:id
-
-        attribute :title do |object|
-          object.blockable.decorate.display_title
-        end
-
-        attribute :sub_title do |object|
-          object.blockable.decorate.display_response_type
-        end
-      end
-    end
+  attribute :created_at do |resource|
+    resource.created_at.strftime("%B %d, %Y")
   end
 end
 ```
 
-‌
+## Testing <a href="#testing" id="testing"></a>
 
-## Testing <a href="testing" id="testing"></a>
-
-Describe how you can test the pattern that you are documenting
+Alba can be tested with simple unit specs.
 
 ```
-Provide a code example here
+# frozen_string_literal: true
+
+require "rails_helper"
+
+RSpec.describe ApiKeyResource do
+  subject { described_class.new(record) }
+
+  let(:record) { create(:api_key, :with_bearer) }
+  let(:data) { subject.serializable_hash }
+  let(:json) { JSON.parse(subject.to_json, symbolize_names: true) }
+
+  it "has attributes" do
+    expect(data).to have_key(:id)
+    expect(data).to have_key(:created_at)
+    expect(data).to have_key(:token)
+  end
+
+  it "matches json schema" do
+    expect(json).to eq(
+      {
+        data: {
+          id: record.id,
+          token: record.token,
+          created_at: record.created_at.strftime("%B %d, %Y")
+        }
+      }
+    )
+  end
+end
 ```

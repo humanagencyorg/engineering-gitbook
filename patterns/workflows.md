@@ -2,21 +2,21 @@
 
 ## Overview
 
-Workflows allow us to write multi-step background processes.  Instead of having one worker call another worker, we can use workflows to declaratively show how each worker flows into the next.
+Workflows allow us to write multi-step background processes. Instead of having one worker call another worker, we can use workflows to declaratively show how each worker flows into the next.
 
-Workflows are an abstraction on top of [Sidekiq Batches](https://github.com/mperham/sidekiq/wiki/Batches).  We use the [simple-sidekiq-batches gem](https://github.com/mpmenne/sidekiq-simple-workflow) to simplify the Sidekiq Batches interface.  This abstraction also helps protect us from some "sharp edges" mentioned in the [Sidekiq Batch documentation](https://github.com/mperham/sidekiq/wiki/Batches#notes) (...like empty steps).
+Workflows are an abstraction on top of [Sidekiq Batches](https://github.com/mperham/sidekiq/wiki/Batches). We use the [simple-sidekiq-batches gem](https://github.com/mpmenne/sidekiq-simple-workflow) to simplify the Sidekiq Batches interface. This abstraction also helps protect us from some "sharp edges" mentioned in the [Sidekiq Batch documentation](https://github.com/mperham/sidekiq/wiki/Batches#notes) (...like empty steps).
 
 A few points about workflows:
 
-**All of the steps are executed linearly ** - Each step is executed only after all of the jobs of the previous step complete.  So if you 6 workers in `step_1`, all 6 workers will need to complete before `step_2` begins executing.
+**All of the steps are executed linearly** - Each step is executed only after all of the jobs of the previous step complete. So if you 6 workers in `step_1`, all 6 workers will need to complete before `step_2` begins executing.
 
-**Everything is a worker** - the workflow itself implements the Sidekiq `perform` method and is executed in the background.  Additionally, each step is executed as a worker.
+**Everything is a worker** - the workflow itself implements the Sidekiq `perform` method and is executed in the background. Additionally, each step is executed as a worker.
 
-**Avoid uniqueness on the batch** - Mike Perham makes a specific point about this in the [Sidekiq Batch documentation](https://github.com/mperham/sidekiq/wiki/Batches#notes).  It can cause bad things.
+**Avoid uniqueness on the batch** - Mike Perham makes a specific point about this in the [Sidekiq Batch documentation](https://github.com/mperham/sidekiq/wiki/Batches#notes). It can cause bad things.
 
-**Your batch may never finish...** - Batches are not guaranteed to finish.  The entire batch only completes if all of the jobs in the preceding steps are completed.  This is obvious, but should be noted.
+**Your batch may never finish...** - Batches are not guaranteed to finish. The entire batch only completes if all of the jobs in the preceding steps are completed. This is obvious, but should be noted.
 
-**Arguments to workflows** - Arguments may be passed directly into the workflow.  Arguments may also be added to the `*args` param within `perform`.  At the moment, more refactoring of workflows is required to pass new arguments from one step to the next.
+**Arguments to workflows** - Arguments may be passed directly into the workflow. Arguments may also be added to the `*args` param within `perform`. At the moment, more refactoring of workflows is required to pass new arguments from one step to the next.
 
 ## Example
 
@@ -67,7 +67,7 @@ end
 Workflows can be integration tested by calling `start_workflow`.
 
 {% hint style="info" %}
-Mike Perham (author of Sidekiq) has a strong opinion that batches should not be integration tested.  His opinion is that each piece should be unit tested.
+Mike Perham (author of Sidekiq) has a strong opinion that batches should not be integration tested. His opinion is that each piece should be unit tested.
 {% endhint %}
 
 The method `batch.status.join` is called on each step when in a test environment. This will drain all of the jobs in the previous step.

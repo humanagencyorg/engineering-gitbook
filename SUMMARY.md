@@ -5,9 +5,10 @@
 ## Setup
 
 * [Local Environment](setup/local-environment.md)
+* [Product Setup](setup/product-setup.md)
 * [Pairing Setup](setup/pairing-setup.md)
 
-## Code Patterns <a href="patterns" id="patterns"></a>
+## Code Patterns <a href="#patterns" id="patterns"></a>
 
 * [Controllers](patterns/controllers.md)
 * [Migrations](patterns/migrations.md)
@@ -27,7 +28,7 @@
   * [Request Specs](patterns/system-specs/request-specs.md)
   * [Page Objects](patterns/system-specs/page-objects.md)
 
-## Team Patterns <a href="team-patterns-1" id="team-patterns-1"></a>
+## Team Patterns <a href="#team-patterns-1" id="team-patterns-1"></a>
 
 * [Code Reviews](team-patterns-1/code-reviews.md)
 * [Pull Requests](team-patterns-1/pull-requests.md)
@@ -35,12 +36,10 @@
 * [TMUX](team-patterns-1/tmux.md)
 * [VIM](team-patterns-1/vim.md)
 * [Pair Programming](team-patterns-1/pair-programming.md)
-* [TDD](team-patterns-1/tdd.md)
 
 ## Agile Patterns
 
 * [Stories](agile-patterns/stories.md)
-* [Team Lead Role](agile-patterns/team-lead-role.md)
 * [Retrospectives](agile-patterns/retrospectives.md)
 
 ## Templates

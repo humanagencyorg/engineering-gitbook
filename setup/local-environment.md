@@ -2,14 +2,14 @@
 
 ## Local Development
 
-Running Experience is simple to get running locally.
+Running The OS is simple to get running locally.
 
 ```
 $ bin/setup
 ```
 
 {% hint style="info" %}
-This assumes that you have a machine capable of running Ruby, Postgresql (10+), and Redis.  If that is not configured on your machine a few `brew` commands should do the trick 😉&#x20;
+This assumes that you have a machine capable of running Ruby, Postgresql (10+), and Redis. If that is not configured on your machine a few `brew` commands should do the trick 😉
 {% endhint %}
 
 This will do a couple of things:
@@ -20,7 +20,7 @@ This will do a couple of things:
 
 ### Ngrok
 
-We also use [ngrok](https://ngrok.com) quite a bit in our local development for remote pairing and integrations with 3rd party APIs.  Here is an example ngrok config that lets you stand up:
+We also use [ngrok](https://ngrok.com) quite a bit in our local development for remote pairing and integrations with 3rd party APIs. Here is an example ngrok config that lets you stand up:
 
 * Rails reverse proxy to `3000`
 * SSH reverse proxy to `22`
@@ -46,7 +46,7 @@ tunnels:
 {% endcode %}
 
 {% hint style="info" %}
-Store your `ngrok.yml` outside of the repository to avoid committing it to version control.  You can reference an external `ngrok.yml` with the following command
+Store your `ngrok.yml` outside of the repository to avoid committing it to version control. You can reference an external `ngrok.yml` with the following command
 
 ```
 $ ngrok start -config ~/.ngrok2/ngrok.yml rails ssh simple_http
@@ -65,14 +65,6 @@ A standard rails server on any port that you like.
 $ rails s
 ```
 
-#### Webpacker
-
-A local Webpacker dev server to hot reload JS and React changes.
-
-```bash
-$ bin/webpack-dev-server
-```
-
 #### Sidekiq
 
 Sidekiq Enterprise for background jobs.
@@ -82,13 +74,21 @@ $ bundle exec sidekiq
 ```
 
 {% hint style="info" %}
-Experience uses a private gem repository for Sidekiq Enterprise.  You will need to add the following keys to Bundler.
+The OS uses a private gem repository for Sidekiq Enterprise. You will need to add the following keys to Bundler.
 
 ```
 $ BUNDLE_ENTERPRISE__CONTRIBSYS__COM=sidekiq_key
 $ bundle config --local enterprise.contribsys.com sidekiq_key
 ```
 {% endhint %}
+
+#### Webpacker
+
+A local Webpacker dev server to hot reload JS and React changes.
+
+```bash
+$ bin/webpack-dev-server
+```
 
 #### React on Rails Renderer
 
@@ -99,7 +99,7 @@ $ yarn run renderer
 ```
 
 {% hint style="info" %}
-Experience uses a private Gem repository for React on Rails.  You will need to add the following keys to Bundler.
+The OS uses a private Gem repository for React on Rails. You will need to add the following keys to Bundler.
 
 ```
 $ bundle config set --local 'rubygems.pkg.github.com' '<username>:<token>'

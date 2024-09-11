@@ -6,7 +6,7 @@ description: What are they and what are they not?
 
 ## Overview
 
-Services are a controversial point in Rails development.  It is a pattern outside of the "Rails Way" and borrows concepts from Domain Driven Design.  Here's our take:
+Services are a controversial point in Rails development. It is a pattern outside of the "Rails Way" and borrows concepts from Domain Driven Design. Here's our take:
 
 {% hint style="info" %}
 Before you use a Service, consider if the logic you need to write would be better suited in a helper or in a domain object.
@@ -16,9 +16,9 @@ Before you use a Service, consider if the logic you need to write would be bette
 
 **Easily Unit Testable** - Services should allow you to abstract logic into a Service that is more easily unit testable.
 
-**Immutable** - Services can be initialized with data.  Once initialized, this object cannot be changed; only a new service can be created.
+**Immutable** - Services can be initialized with data. Once initialized, this object cannot be changed; only a new service can be created.
 
-**Stateless **- The Service object should not contain any state across any request.  Calling the service should always yield the same answer given the same input.
+**Stateless**- The Service object should not contain any state across any request. Calling the service should always yield the same answer given the same input.
 
 {% hint style="info" %}
 **Best Practice**: The class `ApplicationService` should be extended so that all params passed to `call` initialize a new Service object.
@@ -30,27 +30,27 @@ Before you use a Service, consider if the logic you need to write would be bette
 
 ### What Services Are NOT
 
-**Place to persist data** - No database transactions are committed inside of Services.  This lets Services be completely re-usable throughout the codebase.  It avoids complexity around nested transactions and multiple commits per request.
+**Place to persist data** - No database transactions are committed inside of Services. This lets Services be completely re-usable throughout the codebase. It avoids complexity around nested transactions and multiple commits per request.
 
 **Generate JSON** - Serializers should be preferred when it is required to generate JSON for an endpoint.
 
-**Reconstructing Active Record Objects from JSON** - It is preferred that JSON passed from the client should be passed in a format that matches our ActiveRecord objects or a corresponding FormObject.  We recommend avoiding using Service objects to build ActiveRecord objects based on client side JSON.
+**Reconstructing Active Record Objects from JSON** - It is preferred that JSON passed from the client should be passed in a format that matches our ActiveRecord objects or a corresponding FormObject. We recommend avoiding using Service objects to build ActiveRecord objects based on client side JSON.
 
 ### Use Cases
 
-**Perform a complex calculation** - This is a great place for a Service.  It provides a single file where logic can be completely unit tested.  A given input will always generate a specific output.
+**Perform a complex calculation** - This is a great place for a Service. It provides a single file where logic can be completely unit tested. A given input will always generate a specific output.
 
-**Wrap an Adapter** - A service can wrap an adapter that makes an external API call.  For example:
+**Wrap an Adapter** - A service can wrap an adapter that makes an external API call. For example:
 
 1. call an Adapter of an external API
-2. build and return an unsaved ActiveRecord object&#x20;
+2. build and return an unsaved ActiveRecord object
 
-**Build ActiveRecord Objects **- A service can wrap the logic around building a series of ActiveRecord objects that will be persisted.  For example:
+\*\*Build ActiveRecord Objects \*\*- A service can wrap the logic around building a series of ActiveRecord objects that will be persisted. For example:
 
 1. Receive a webhook for a new Stripe invoice
 2. Generate and return ActiveRecord objects for persisting the Invoice in the database.
 
-## Example <a href="example" id="example"></a>
+## Example <a href="#example" id="example"></a>
 
 ### Build an ActiveRecord Object
 
@@ -88,13 +88,9 @@ module ResponseServices
 end
 ```
 
-## Testing <a href="testing" id="testing"></a>
+## Testing <a href="#testing" id="testing"></a>
 
-Services are unit tested.  Since there is nothing persisted to the database, you should verify:
+Services are unit tested. Since there is nothing persisted to the database, you should verify:
 
 1. The output of the Service was correct
 2. The appropriate stubs were called from the service.
-
-```
-Provide a code example here
-```
